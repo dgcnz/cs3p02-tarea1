@@ -6,6 +6,10 @@
 2.KVM: live migration
 3.Xen: live migration
 
+**VirtualBox Teleport:**
+
+- [Teleporting docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/teleporting.html)
+
 ## 2.Crear una politica simple que me permita controlar operaciones de live migration
 
 2.1 Ejemplo de politica
