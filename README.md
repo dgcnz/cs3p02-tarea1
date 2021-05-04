@@ -9,13 +9,14 @@
 **VirtualBox Teleport:**
 
 - [Teleporting docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/teleporting.html)
+- [Ubuntu Server VDI](https://www.osboxes.org/ubuntu-server/)
 
 **Procedure**
 
 1. Create `SOURCE` and `TARGET` VM. Both must share exactly the same specs and storage.
 2. `VBoxManage modifyvm TARGET --teleporter on --teleporterport PORT`
     - `PORT` is a TCP/IP port used on both `SOURCE` and `TARGET`.
-3. Start `TARGET`. It will wait for a telepor request.
+3. Start `TARGET`. It will wait for a teleport request.
 4. Start `SOURCE`.
 5. `VBoxManage controlvm SOURCE teleport --host TARGETHOST --port PORT`
     - `TARGETHOST` is the host or IP name of the target host on which `TARGET` is running.
