@@ -1,4 +1,5 @@
 import sys
+import os
 import argparse
 import subprocess
 
@@ -32,7 +33,7 @@ def run(args):
 
 def create_vm(args):
     commands = [
-        f'VBoxManage createvm --name {args.vm_name} --ostype "Debian_64" --register --basefolder `pwd`',
+        f'VBoxManage createvm --name {args.vm_name} --ostype "Ubuntu_64" --register --basefolder {os.getcwd()}',
         f'VBoxManage modifyvm {args.vm_name} --ioapic on',
         f'VBoxManage modifyvm {args.vm_name} --memory 1024 --vram 128',
         f'VBoxManage modifyvm {args.vm_name} --nic1 nat',
