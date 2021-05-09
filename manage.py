@@ -2,29 +2,30 @@ import sys
 import os
 import argparse
 import subprocess
+import shlex
 
 
 def download_iso(args):
     cmd = f'wget http://releases.ubuntu.com/raring/ubuntu-13.04-server-amd64.iso -O {args.iso_path}'
-    subprocess.run(cmd.split())
+    subprocess.run(shlex.split(cmd))
 
 
 def setup_teleportation(args):
     # TODO argparse
     cmd = f'VBoxManage modifyvm {args.target_vm} --teleporter on --teleporterport {args.port}'
-    subprocess.run(cmd.split())
+    subprocess.run(shlex.split(cmd))
 
 
 def teleport(args):
     # TODO argparse
     cmd = f'VBoxManage controlvm {args.source_vm} teleport --host {args.target_host} --port {args.port}'
-    subprocess.run(cmd.split())
+    subprocess.run(shlex.split(cmd))
 
 
 def run(args):
     # TODO argparse
     cmd = f'VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-exit --wait-stdout'
-    result = subprocess.run(cmd.split(),
+    result = subprocess.run(shlex.split(cmd),
                             capture_output=True,
                             universal_newlines=True)
     print(result.stdout)
@@ -46,12 +47,12 @@ def create_vm(args):
         f'VBoxManage modifyvm {args.vm_name} --vrdemulticon on --vrdeport 10001'
     ]
     for cmd in commands:
-        subprocess.run(cmd.split())
+        subprocess.run(shlex.split(cmd))
 
 
 def create_storage(args):
     cmd = f"VBoxManage createhd --filename {args.storage_name} --size 80000 --format VDI"
-    subprocess.run(cmd.split())
+    subprocess.run(shlex.split(cmd))
 
 
 if __name__ == '__main__':
