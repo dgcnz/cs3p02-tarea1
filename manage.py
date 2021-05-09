@@ -33,14 +33,14 @@ def run(args):
 
 def create_vm(args):
     commands = [
-        f'VBoxManage createvm --name {args.vm_name} --ostype "Ubuntu_64" --register --basefolder {os.getcwd()}',
+        f'VBoxManage createvm --name {args.vm_name} --ostype \"Ubuntu_64\" --register --basefolder {os.getcwd()}',
         f'VBoxManage modifyvm {args.vm_name} --ioapic on',
         f'VBoxManage modifyvm {args.vm_name} --memory 1024 --vram 128',
         f'VBoxManage modifyvm {args.vm_name} --nic1 nat',
-        f'VBoxManage storagectl {args.vm_name} --name "SATA Controller" --add sata --controller IntelAhci',
-        f'VBoxManage storageattach {args.vm_name} --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium {args.storage_name}',
-        f'VBoxManage storagectl {args.vm_name} --name "IDE Controller" --add ide --controller PIIX4',
-        f'VBoxManage storageattach {args.vm_name} --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium {args.iso_path}',
+        f'VBoxManage storagectl {args.vm_name} --name \"SATA Controller\" --add sata --controller IntelAhci',
+        f'VBoxManage storageattach {args.vm_name} --storagectl \"SATA Controller\" --port 0 --device 0 --type hdd --medium {args.storage_name}',
+        f'VBoxManage storagectl {args.vm_name} --name \"IDE Controller\" --add ide --controller PIIX4',
+        f'VBoxManage storageattach {args.vm_name} --storagectl \"IDE Controller\" --port 1 --device 0 --type dvddrive --medium {args.iso_path}',
         f'VBoxManage modifyvm {args.vm_name} --boot1 dvd --boot2 disk --boot3 none --boot4 none',
         f'VBoxManage modifyvm {args.vm_name} --vrde on',
         f'VBoxManage modifyvm {args.vm_name} --vrdemulticon on --vrdeport 10001'
