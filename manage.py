@@ -22,8 +22,12 @@ def teleport(args):
     subprocess.run(shlex.split(cmd))
 
 
+def start_vm(args):
+    cmd = f"VBoxManage startvm {args.vm_name} --type headless"
+    subprocess.run(shlex.split(cmd))
+
+
 def run(args):
-    # TODO argparse
     cmd = f"VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-exit --wait-stdout"
     result = subprocess.run(
         shlex.split(cmd), capture_output=True, universal_newlines=True
@@ -75,7 +79,6 @@ if __name__ == "__main__":
     parser_create_vm.add_argument(
         "storage_name", type=str, help="The name of the storage."
     )
-
     parser_create_vm.add_argument("iso_path", type=str, help="Path to iso downloaded.")
 
     parser_download_iso = subparsers.add_parser("download_iso")
@@ -83,5 +86,21 @@ if __name__ == "__main__":
     parser_download_iso.add_argument(
         "iso_path", type=str, help="Path to download iso to."
     )
+
+    parser_start_vm = subparsers.add_parser("start_vm")
+    parser_start_vm.set_defaults(func=start_vm)
+    parser_start_vm.add_argument(
+        "vm_name", type=str, help="The name of the virtual machine."
+    )
+
+    parser_run = subparsers.add_parser("run")
+    parser_run.set_defaults(func=run)
+    parser_run.add_argument(
+        "vm_name", type=str, help="The name of the virtual machine."
+    )
+    parser_run.add_argument(
+        "command", type=str, help="Command to run on virtual machine."
+    )
+
     args = parser.parse_args()
     args.func(args)
