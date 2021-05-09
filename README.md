@@ -31,4 +31,23 @@
     - `$ apt get install stress-ng`
     - `$ sleep 30; stress-ng --cpu 2 –memory : 250MB –i/o`
 
-## Implementationa
+## Instructions
+
+**Step 1: Download iso**
+
+```sh
+python manage.py dowload_iso ubuntu.iso
+```
+
+**Step 2: Create storage**
+
+```sh
+python manage.py create_storage storage
+```
+
+**Step 3: Create vms**
+
+```sh
+python manage.py create_vm source storage.vdi ubuntu.iso
+python manage.py create_vm target storage.vdi ubuntu.iso
+```
