@@ -4,7 +4,7 @@ import subprocess
 
 
 def download_iso(args):
-    cmd = f'wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.9.0-amd64-netinst.iso -O {args.iso_path}'
+    cmd = f'wget http://releases.ubuntu.com/raring/ubuntu-13.04-server-amd64.iso {args.iso_path}'
     subprocess.run(cmd.split())
 
 
