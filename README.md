@@ -30,3 +30,5 @@
 2.  CPU, memoria> Ejemplo de aplicacion para generar carga
     - `$ apt get install stress-ng`
     - `$ sleep 30; stress-ng --cpu 2 –memory : 250MB –i/o`
+
+## Implementationa
