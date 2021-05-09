@@ -28,7 +28,7 @@ def start_vm(args):
 
 
 def run(args):
-    cmd = f"VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-exit --wait-stdout"
+    cmd = f"VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-stdout"
     result = subprocess.run(
         shlex.split(cmd), capture_output=True, universal_newlines=True
     )
