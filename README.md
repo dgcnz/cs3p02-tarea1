@@ -1,73 +1,59 @@
 # Tarea 1
 
-## 1. Crear un script (bash, libvirt, etc.) que ejecute la operacion de Live Migration.
+**Integrantes**:
 
-1. VirtualBox: Teleport
-2. KVM: live migration
-3. Xen: live migration
+- Maria Lovaton
+- Diego Canez
 
-**VirtualBox Teleport:**
+## Instrucciones
 
-- [Teleporting docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/teleporting.html)
-- [Ubuntu Server VDI](https://www.osboxes.org/ubuntu-server/)
-- [Teleportation](http://www.techsologic.com/virtualbox-live-migration.php)
-
-**Procedure**
-
-1. Create `SOURCE` and `TARGET` VM. Both must share exactly the same specs and storage.
-2. `VBoxManage modifyvm TARGET --teleporter on --teleporterport PORT`
-    - `PORT` is a TCP/IP port used on both `SOURCE` and `TARGET`.
-3. Start `TARGET`. It will wait for a teleport request.
-4. Start `SOURCE`.
-5. `VBoxManage controlvm SOURCE teleport --host TARGETHOST --port PORT`
-    - `TARGETHOST` is the host or IP name of the target host on which `TARGET` is running.
-    - `PORT` is the same as step 2.
-
-## 2.Crear una politica simple que me permita controlar operaciones de live migration
-
-1. Ejemplo de politica
-    - CPU > 80% - trigger Live Migration,,,  :   id-1
-    - CPU 85% - Live Migration                      :   id-2
-2.  CPU, memoria> Ejemplo de aplicacion para generar carga
-    - `$ apt get install stress-ng`
-    - `$ sleep 30; stress-ng --cpu 2 –memory : 250MB –i/o`
-
-## Instructions
-
-**Step 1: Download iso**
+**Paso 1: Descargar el ISO**
 
 ```sh
 python manage.py dowload_iso alpine.iso
 ```
 
-**Step 2: Create storage**
+**Paso 2: Crear el storage**
 
 ```sh
 python manage.py create_storage storage
 ```
 
-**Step 3: Create vms**
+**Paso 3: Crear las maquinas virtuales**
 
 ```sh
 python manage.py create_vm source storage.vdi alpine.iso
 python manage.py create_vm target storage.vdi alpine.iso
 ```
 
-**Step 4: Setup teleportation**
+**Paso 4: Configurar el teleportation**
 
 ```sh
 python manage.py setup_teleportation target
 ```
 
-**Step 5: Start source and target vms**
+**Paso 5: Iniciar las maquinas virtuales**
 
 ```sh
 python manage.py start_vm source
 python manage.py start_vm target
 ```
 
-**Step 6: Teleport**
+**Paso 6: Correr daemon con politica de migracion**
 
 ```sh
-python teleport source
+# TODO
 ```
+
+**Paso 7: Inducir una carga en el host para activar el Live Migration**
+
+```sh
+# TODO
+```
+
+
+## Algunas fuentes:
+
+- [Teleporting docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/teleporting.html)
+- [Teleportation](http://www.techsologic.com/virtualbox-live-migration.php)
+- [Create VM from CLI](https://www.andreafortuna.org/2019/10/24/how-to-create-a-virtualbox-vm-from-command-line/)
