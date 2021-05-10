@@ -6,7 +6,7 @@ import shlex
 
 
 def download_iso(args):
-    cmd = f"wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.9.0-amd64-netinst.iso -O {args.iso_path}"
+    cmd = f"wget https://dl-cdn.alpinelinux.org/alpine/v3.13/releases/x86_64/alpine-virt-3.13.5-x86_64.iso -O {args.iso_path}"
     subprocess.run(shlex.split(cmd))
 
 
@@ -38,7 +38,7 @@ def run(args):
 
 def create_vm(args):
     commands = [
-        f'VBoxManage createvm --name {args.vm_name} --ostype "Debian_64" --register --basefolder {os.getcwd()}',
+        f'VBoxManage createvm --name {args.vm_name} --ostype "Linux" --register --basefolder {os.getcwd()}',
         f"VBoxManage modifyvm {args.vm_name} --ioapic on",
         f"VBoxManage modifyvm {args.vm_name} --memory 1024 --vram 128",
         f"VBoxManage modifyvm {args.vm_name} --nic1 nat",
