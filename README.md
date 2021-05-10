@@ -37,7 +37,7 @@
 **Step 1: Download iso**
 
 ```sh
-python manage.py dowload_iso ubuntu.iso
+python manage.py dowload_iso debian.iso
 ```
 
 **Step 2: Create storage**
@@ -49,6 +49,25 @@ python manage.py create_storage storage
 **Step 3: Create vms**
 
 ```sh
-python manage.py create_vm source storage.vdi ubuntu.iso
-python manage.py create_vm target storage.vdi ubuntu.iso
+python manage.py create_vm source storage.vdi debian.iso
+python manage.py create_vm target storage.vdi debian.iso
+```
+
+**Step 4: Setup teleportation**
+
+```sh
+python manage.py setup_teleportation target
+```
+
+**Step 5: Start source and target vms**
+
+```sh
+python manage.py start_vm source
+python manage.py start_vm target
+```
+
+**Step 6: Teleport**
+
+```sh
+python teleport source
 ```
