@@ -10,6 +10,7 @@
 
 - [Teleporting docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/admin/teleporting.html)
 - [Ubuntu Server VDI](https://www.osboxes.org/ubuntu-server/)
+- [Teleportation](http://www.techsologic.com/virtualbox-live-migration.php)
 
 **Procedure**
 

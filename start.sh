@@ -1,1 +1,0 @@
-VBoxHeadless --startvm $MACHINENAME
