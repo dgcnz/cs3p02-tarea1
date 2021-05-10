@@ -16,7 +16,9 @@ def setup_teleportation(args):
 
 
 def teleport(args):
-    cmd = f"VBoxManage controlvm {args.source_vm} teleport --host localhost --port 12345"
+    cmd = (
+        f"VBoxManage controlvm {args.source_vm} teleport --host localhost --port 12345"
+    )
     subprocess.run(shlex.split(cmd))
 
 
@@ -27,9 +29,9 @@ def start_vm(args):
 
 def run(args):
     cmd = f"VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-stdout"
-    result = subprocess.run(shlex.split(cmd),
-                            capture_output=True,
-                            universal_newlines=True)
+    result = subprocess.run(
+        shlex.split(cmd), capture_output=True, universal_newlines=True
+    )
     print(result.stdout)
     print(result.stderr)
 
@@ -65,52 +67,52 @@ if __name__ == "__main__":
 
     parser_create_storage = subparsers.add_parser("create_storage")
     parser_create_storage.set_defaults(func=create_storage)
-    parser_create_storage.add_argument("storage_name",
-                                       type=str,
-                                       help="The name of the storage.")
+    parser_create_storage.add_argument(
+        "storage_name", type=str, help="The name of the storage."
+    )
 
     parser_create_vm = subparsers.add_parser("create_vm")
     parser_create_vm.set_defaults(func=create_vm)
-    parser_create_vm.add_argument("vm_name",
-                                  type=str,
-                                  help="The name of the virtual machine.")
-    parser_create_vm.add_argument("storage_name",
-                                  type=str,
-                                  help="The name of the storage.")
-    parser_create_vm.add_argument("iso_path",
-                                  type=str,
-                                  help="Path to iso downloaded.")
+    parser_create_vm.add_argument(
+        "vm_name", type=str, help="The name of the virtual machine."
+    )
+    parser_create_vm.add_argument(
+        "storage_name", type=str, help="The name of the storage."
+    )
+    parser_create_vm.add_argument("iso_path", type=str, help="Path to iso downloaded.")
 
     parser_download_iso = subparsers.add_parser("download_iso")
     parser_download_iso.set_defaults(func=download_iso)
-    parser_download_iso.add_argument("iso_path",
-                                     type=str,
-                                     help="Path to download iso to.")
+    parser_download_iso.add_argument(
+        "iso_path", type=str, help="Path to download iso to."
+    )
 
     parser_start_vm = subparsers.add_parser("start_vm")
     parser_start_vm.set_defaults(func=start_vm)
-    parser_start_vm.add_argument("vm_name",
-                                 type=str,
-                                 help="The name of the virtual machine.")
+    parser_start_vm.add_argument(
+        "vm_name", type=str, help="The name of the virtual machine."
+    )
 
     parser_run = subparsers.add_parser("run")
     parser_run.set_defaults(func=run)
-    parser_run.add_argument("vm_name",
-                            type=str,
-                            help="The name of the virtual machine.")
-    parser_run.add_argument("command",
-                            type=str,
-                            help="Command to run on virtual machine.")
+    parser_run.add_argument(
+        "vm_name", type=str, help="The name of the virtual machine."
+    )
+    parser_run.add_argument(
+        "command", type=str, help="Command to run on virtual machine."
+    )
 
     parser_setup_teleportation = subparsers.add_parser("setup_teleportation")
     parser_setup_teleportation.set_defaults(func=setup_teleportation)
     parser_setup_teleportation.add_argument(
-        "target_vm", type=str, help="The name of the target virtual machine.")
+        "target_vm", type=str, help="The name of the target virtual machine."
+    )
 
     parser_teleport = subparsers.add_parser("teleport")
     parser_teleport.set_defaults(func=teleport)
     parser_teleport.add_argument(
-        "source_vm", type=str, help="The name of the source virtual machine.")
+        "source_vm", type=str, help="The name of the source virtual machine."
+    )
 
     args = parser.parse_args()
     args.func(args)
