@@ -67,6 +67,8 @@ Politica configurable:
 2. `MEMORY_USAGE` (30.0% en el ejemplo)
 3. `TIME_THRESHOLD` (5 segundos en el ejemplo)
 
+Entonces, si el host machine usa mas del 80% del CPU o el 30% de la memoria virtual por mas de 5 segundos, se activara la migracion.
+
 ```sh
 # Este comando se quedara esperando a que la politica se active y se migre source
 python manage.py monitor source 80.0 30.0 5
