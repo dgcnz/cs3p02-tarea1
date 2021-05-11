@@ -1,6 +1,6 @@
 # Tarea 1
 
-[**Video del uso**](docs/recording.mp4)
+[**Video del uso**](https://youtu.be/s804lz9478k)
 
 **Integrantes**:
 
