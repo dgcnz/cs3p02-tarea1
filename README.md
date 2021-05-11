@@ -7,10 +7,14 @@
 
 ## Instrucciones
 
-**Paso 0: Uso de manage.py**
+**Paso 0: Previos**
+
+Usar Python3, e instalar requerimientos:
+```sh
+pip install -r requirements.txt
+```
 
 Documentacion:
-
 ```sh
 python manage.py --help
 python manage.py [command] --help
