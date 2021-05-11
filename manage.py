@@ -5,28 +5,21 @@ import shlex
 import subprocess
 import sys
 import time
+import psutil
 
 
 def monitor(args):
     while True:
-        cmd = ["vmstat", "-a"]
-        result = subprocess.run(cmd, capture_output=True, universal_newlines=True)
-
-        if result.stderr:
-            raise Exception("vmstat failed")
-
-        raw_metrics = re.split(" +", result.stdout.split("\n")[2].strip())
-        metrics = [int(i) for i in raw_metrics]
-        cpu_usage = metrics[12]
-        vm_usage = (metrics[5] / (metrics[4] + metrics[5])) * 100
+        cpu_usage = psutil.cpu_percent(args.time_threshold)
+        vm_usage = psutil.virtual_memory()[2]
 
         maxed_out_cpu = args.max_cpu_usage < cpu_usage
         maxed_out_vm = args.max_vm_usage < vm_usage
         if maxed_out_cpu or maxed_out_vm:
-            print("time to do something")
+            teleport(args)
             break
 
-        time.sleep(3)
+        time.sleep(args.time_threshold)
 
 
 def download_iso(args):
@@ -53,9 +46,9 @@ def start_vm(args):
 
 def run(args):
     cmd = f"VBoxManage --nologo guestcontrol {args.vm_name} run --exe {args.command} --wait-stdout"
-    result = subprocess.run(
-        shlex.split(cmd), capture_output=True, universal_newlines=True
-    )
+    result = subprocess.run(shlex.split(cmd),
+                            capture_output=True,
+                            universal_newlines=True)
     print(result.stdout)
     print(result.stderr)
 
@@ -91,60 +84,68 @@ def main():
 
     parser_create_storage = subparsers.add_parser("create_storage")
     parser_create_storage.set_defaults(func=create_storage)
-    parser_create_storage.add_argument(
-        "storage_name", type=str, help="The name of the storage."
-    )
+    parser_create_storage.add_argument("storage_name",
+                                       type=str,
+                                       help="The name of the storage.")
 
     parser_create_vm = subparsers.add_parser("create_vm")
     parser_create_vm.set_defaults(func=create_vm)
-    parser_create_vm.add_argument(
-        "vm_name", type=str, help="The name of the virtual machine."
-    )
-    parser_create_vm.add_argument(
-        "storage_name", type=str, help="The name of the storage."
-    )
-    parser_create_vm.add_argument("iso_path", type=str, help="Path to iso downloaded.")
+    parser_create_vm.add_argument("vm_name",
+                                  type=str,
+                                  help="The name of the virtual machine.")
+    parser_create_vm.add_argument("storage_name",
+                                  type=str,
+                                  help="The name of the storage.")
+    parser_create_vm.add_argument("iso_path",
+                                  type=str,
+                                  help="Path to iso downloaded.")
 
     parser_download_iso = subparsers.add_parser("download_iso")
     parser_download_iso.set_defaults(func=download_iso)
-    parser_download_iso.add_argument(
-        "iso_path", type=str, help="Path to download iso to."
-    )
+    parser_download_iso.add_argument("iso_path",
+                                     type=str,
+                                     help="Path to download iso to.")
 
     parser_start_vm = subparsers.add_parser("start_vm")
     parser_start_vm.set_defaults(func=start_vm)
-    parser_start_vm.add_argument(
-        "vm_name", type=str, help="The name of the virtual machine."
-    )
+    parser_start_vm.add_argument("vm_name",
+                                 type=str,
+                                 help="The name of the virtual machine.")
 
     parser_run = subparsers.add_parser("run")
     parser_run.set_defaults(func=run)
-    parser_run.add_argument(
-        "vm_name", type=str, help="The name of the virtual machine."
-    )
-    parser_run.add_argument(
-        "command", type=str, help="Command to run on virtual machine."
-    )
+    parser_run.add_argument("vm_name",
+                            type=str,
+                            help="The name of the virtual machine.")
+    parser_run.add_argument("command",
+                            type=str,
+                            help="Command to run on virtual machine.")
 
     parser_setup_teleportation = subparsers.add_parser("setup_teleportation")
     parser_setup_teleportation.set_defaults(func=setup_teleportation)
     parser_setup_teleportation.add_argument(
-        "target_vm", type=str, help="The name of the target virtual machine."
-    )
+        "target_vm", type=str, help="The name of the target virtual machine.")
 
     parser_teleport = subparsers.add_parser("teleport")
     parser_teleport.set_defaults(func=teleport)
     parser_teleport.add_argument(
-        "source_vm", type=str, help="the name of the source virtual machine."
-    )
+        "source_vm", type=str, help="The name of the source virtual machine.")
 
     parser_monitor = subparsers.add_parser("monitor")
     parser_monitor.set_defaults(func=monitor)
-    parser_monitor.add_argument("max_cpu_usage", type=int, help="Max CPU usage.")
-    parser_monitor.add_argument(
-        "max_vm_usage", type=int, help="Max virtual memory usage."
-    )
+    parser_monitor.add_argument("source_vm",
+                                type=str,
+                                help="The name of the source virtual machine.")
+    parser_monitor.add_argument("max_cpu_usage",
+                                type=float,
+                                help="Max CPU usage.")
+    parser_monitor.add_argument("max_vm_usage",
+                                type=float,
+                                help="Max virtual memory usage.")
 
+    parser_monitor.add_argument("time_threshold",
+                                type=float,
+                                help="Time under max load.")
     args = parser.parse_args()
     args.func(args)
 

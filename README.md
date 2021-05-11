@@ -7,6 +7,15 @@
 
 ## Instrucciones
 
+**Paso 0: Uso de manage.py**
+
+Documentacion:
+
+```sh
+python manage.py --help
+python manage.py [command] --help
+```
+
 **Paso 1: Descargar el ISO**
 
 ```sh
@@ -41,16 +50,20 @@ python manage.py start_vm target
 
 **Paso 6: Correr daemon con politica de migracion**
 
+Politica configurable:
+1. CPU_USAGE (80.0, en el ejemplo)
+2. MEMORY_USAGE (30.0% en el ejemplo)
+3. TIME_THRESHOLD (5 segundos en el ejemplo)
+
 ```sh
-# TODO
+python manage.py monitor source 80.0 30.0 5
 ```
 
 **Paso 7: Inducir una carga en el host para activar el Live Migration**
 
 ```sh
-# TODO
+stress --cpu 2 --io 4 --vm 2 --hdd 1 --timeout 15s
 ```
-
 
 ## Algunas fuentes:
 
