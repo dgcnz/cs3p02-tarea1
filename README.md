@@ -51,6 +51,8 @@ python manage.py setup_teleportation target
 
 ```sh
 python manage.py start_vm source
+
+# Este comando se quedara esperando a la migracion
 python manage.py start_vm target
 ```
 
@@ -62,6 +64,7 @@ Politica configurable:
 3. `TIME_THRESHOLD` (5 segundos en el ejemplo)
 
 ```sh
+# Este comando se quedara esperando a que la politica se active y se migre source
 python manage.py monitor source 80.0 30.0 5
 ```
 
