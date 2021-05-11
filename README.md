@@ -1,5 +1,7 @@
 # Tarea 1
 
+[**Video del uso**](docs/recording.mp4)
+
 **Integrantes**:
 
 - Diego Canez
