@@ -37,7 +37,7 @@
 **Step 1: Download iso**
 
 ```sh
-python manage.py dowload_iso debian.iso
+python manage.py dowload_iso alpine.iso
 ```
 
 **Step 2: Create storage**
@@ -49,8 +49,8 @@ python manage.py create_storage storage
 **Step 3: Create vms**
 
 ```sh
-python manage.py create_vm source storage.vdi debian.iso
-python manage.py create_vm target storage.vdi debian.iso
+python manage.py create_vm source storage.vdi alpine.iso
+python manage.py create_vm target storage.vdi alpine.iso
 ```
 
 **Step 4: Setup teleportation**
