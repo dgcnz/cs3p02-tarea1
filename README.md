@@ -4,8 +4,8 @@
 
 **Integrantes**:
 
-- Diego Canez
-- Maria Lovaton
+- Diego Canez (201710319)
+- Maria Lovaton (201710510)
 
 ## Instrucciones
 
