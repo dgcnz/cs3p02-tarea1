@@ -2,8 +2,8 @@
 
 **Integrantes**:
 
-- Maria Lovaton
 - Diego Canez
+- Maria Lovaton
 
 ## Instrucciones
 
