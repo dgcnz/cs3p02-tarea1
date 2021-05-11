@@ -11,7 +11,11 @@
 
 **Paso 0: Previos**
 
-Usar Python3, e instalar requerimientos:
+Requerimientos:
+- Python 3
+- VirtualBox
+
+Usar Python3, e instalar librerias:
 ```sh
 pip install -r requirements.txt
 ```
