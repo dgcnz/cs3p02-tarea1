@@ -19,7 +19,7 @@ python manage.py [command] --help
 **Paso 1: Descargar el ISO**
 
 ```sh
-python manage.py dowload_iso alpine.iso
+python manage.py download_iso alpine.iso
 ```
 
 **Paso 2: Crear el storage**
@@ -51,9 +51,9 @@ python manage.py start_vm target
 **Paso 6: Correr daemon con politica de migracion**
 
 Politica configurable:
-1. CPU_USAGE (80.0, en el ejemplo)
-2. MEMORY_USAGE (30.0% en el ejemplo)
-3. TIME_THRESHOLD (5 segundos en el ejemplo)
+1. `CPU_USAGE` (80.0, en el ejemplo)
+2. `MEMORY_USAGE` (30.0% en el ejemplo)
+3. `TIME_THRESHOLD` (5 segundos en el ejemplo)
 
 ```sh
 python manage.py monitor source 80.0 30.0 5
